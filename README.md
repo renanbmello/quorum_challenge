@@ -22,7 +22,7 @@ This application processes legislative data to provide insights about:
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/renanbmello/quorum_challenge.git
 cd legislative-analysis
 ```
 
