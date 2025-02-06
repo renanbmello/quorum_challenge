@@ -18,6 +18,8 @@
                                 <th>Name</th>
                                 <th>Supported</th>
                                 <th>Opposed</th>
+                                <th>Supported Bills</th>
+                                <th>Opposed Bills</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,6 +28,20 @@
                                 <td>{{ legislator.name }}</td>
                                 <td>{{ legislator.supported_count }}</td>
                                 <td>{{ legislator.opposed_count }}</td>
+                                <td>
+                                    <ul class="list-unstyled mb-0">
+                                        {% for bill in legislator.supported_bills %}
+                                            <li>{{ bill }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-unstyled mb-0">
+                                        {% for bill in legislator.opposed_bills %}
+                                            <li>{{ bill }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

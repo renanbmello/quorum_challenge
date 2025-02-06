@@ -39,3 +39,25 @@ class LegislativeService:
                     legislator.opposed_bills.append(bill_title)
         
         return legislators 
+
+    def get_bills_analysis(self):
+        self._load_vote_data()
+        bills_analysis = []
+        
+        for _, bill in self._bills_df.iterrows():
+            votes_for_bill = self._vote_results_df[
+                self._vote_results_df['vote_id'].isin(
+                    self._votes_df[self._votes_df['bill_id'] == bill.id]['id']
+                )
+            ]
+            
+            support_count = len(votes_for_bill[votes_for_bill['vote_type'] == 1])
+            opposition_count = len(votes_for_bill[votes_for_bill['vote_type'] == 2])
+            
+            bills_analysis.append({
+                'title': bill.title,
+                'support_count': support_count,
+                'opposition_count': opposition_count
+            })
+        
+        return bills_analysis 
