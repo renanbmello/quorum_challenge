@@ -8,7 +8,7 @@
     <div class="col-md-6 mb-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Legislators</h5>
+                <h5 class="card-title mb-0">Legislators Voting Summary</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,6 +26,36 @@
                                 <td>{{ legislator.name }}</td>
                                 <td>{{ legislator.supported_count }}</td>
                                 <td>{{ legislator.opposed_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Bills Analysis</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Bill</th>
+                                <th>Support</th>
+                                <th>Opposition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bill in bills_analysis %}
+                            <tr>
+                                <td>{{ bill.title }}</td>
+                                <td>{{ bill.support_count }}</td>
+                                <td>{{ bill.opposition_count }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
