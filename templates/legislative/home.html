@@ -1,0 +1,38 @@
+{% extends 'base/layout.html' %}
+
+{% block title %}Home - Legislative Analysis{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Legislator Stats -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Legislators</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Supported</th>
+                                <th>Opposed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for legislator in legislators %}
+                            <tr>
+                                <td>{{ legislator.name }}</td>
+                                <td>{{ legislator.supported_count }}</td>
+                                <td>{{ legislator.opposed_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
