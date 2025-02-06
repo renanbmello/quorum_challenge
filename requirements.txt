@@ -1,6 +1,5 @@
 Django
 pandas
-numpy
 python-dotenv
 django-debug-toolbar
 pytest-django 
