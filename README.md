@@ -11,8 +11,8 @@ This application processes legislative data to provide insights about:
 
 ## Technologies
 
-- Python 3.8+
-- Django 5.1.6
+- Python 
+- Django 
 - Pandas for data analysis
 - Bootstrap for UI
 
@@ -23,9 +23,8 @@ This application processes legislative data to provide insights about:
 
 ```bash
 git clone https://github.com/renanbmello/quorum_challenge.git
-cd legislative-analysis
+cd quorum_challenge
 ```
-
 
 2. Create and activate virtual environment:
 
