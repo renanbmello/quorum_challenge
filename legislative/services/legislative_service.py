@@ -44,6 +44,9 @@ class LegislativeService:
         self._load_vote_data()
         bills_analysis = []
         
+        legislators = self.legislator_repository.get_all()
+        legislator_names = {l.id: l.name for l in legislators}
+        
         for _, bill in self._bills_df.iterrows():
             votes_for_bill = self._vote_results_df[
                 self._vote_results_df['vote_id'].isin(
@@ -54,10 +57,13 @@ class LegislativeService:
             support_count = len(votes_for_bill[votes_for_bill['vote_type'] == 1])
             opposition_count = len(votes_for_bill[votes_for_bill['vote_type'] == 2])
             
+            sponsor_name = legislator_names.get(bill['sponsor_id'], 'Unknown')
+            
             bills_analysis.append({
-                'title': bill.title,
+                'title': bill['title'],
                 'support_count': support_count,
-                'opposition_count': opposition_count
+                'opposition_count': opposition_count,
+                'sponsor_name': sponsor_name
             })
         
         return bills_analysis 

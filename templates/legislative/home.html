@@ -63,6 +63,7 @@
                                 <th>Bill</th>
                                 <th>Support</th>
                                 <th>Opposition</th>
+                                <th>Primary Sponsor</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,6 +72,7 @@
                                 <td>{{ bill.title }}</td>
                                 <td>{{ bill.support_count }}</td>
                                 <td>{{ bill.opposition_count }}</td>
+                                <td>{{ bill.sponsor_name }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
