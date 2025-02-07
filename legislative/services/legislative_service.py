@@ -57,7 +57,7 @@ class LegislativeService:
             support_count = len(votes_for_bill[votes_for_bill['vote_type'] == 1])
             opposition_count = len(votes_for_bill[votes_for_bill['vote_type'] == 2])
             
-            sponsor_name = legislator_names.get(bill['sponsor_id'], 'Unknown')
+            sponsor_name = legislator_names.get(bill['sponsor_id'], 'No sponsor')
             
             bills_analysis.append({
                 'title': bill['title'],
