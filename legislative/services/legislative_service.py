@@ -18,27 +18,24 @@ class LegislativeService:
         self._load_vote_data()
         legislators = self.legislator_repository.get_all()
         
-        vote_to_bill = dict(zip(self._votes_df['id'], self._votes_df['bill_id']))
-        bill_to_title = dict(zip(self._bills_df['id'], self._bills_df['title']))
+        votes_with_bills = (
+            self._vote_results_df
+            .merge(self._votes_df[['id', 'bill_id']], left_on='vote_id', right_on='id')
+            .merge(self._bills_df[['id', 'title']], left_on='bill_id', right_on='id')
+        )
+        
+        grouped = votes_with_bills.groupby(['legislator_id', 'vote_type'])['title'].agg(list)
         
         for legislator in legislators:
-            legislator_votes = self._vote_results_df[
-                self._vote_results_df['legislator_id'] == legislator.id
-            ]
-            
-            legislator.supported_bills = []
-            legislator.opposed_bills = []
-            
-            for _, vote in legislator_votes.iterrows():
-                bill_id = vote_to_bill[vote['vote_id']]
-                bill_title = bill_to_title[bill_id]
-                
-                if vote['vote_type'] == 1:  
-                    legislator.supported_bills.append(bill_title)
-                elif vote['vote_type'] == 2:  
-                    legislator.opposed_bills.append(bill_title)
+            legislator.supported_bills = (
+                grouped.get((legislator.id, 1), [])
+            )
+            legislator.opposed_bills = (
+                grouped.get((legislator.id, 2), [])
+
+            )
         
-        return legislators 
+        return legislators
 
     def get_bills_analysis(self):
         self._load_vote_data()
